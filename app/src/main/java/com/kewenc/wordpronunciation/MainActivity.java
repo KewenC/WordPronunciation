@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Log.e("TAGF","GG");
-                downLoadTask.cancel(true);
+//                downLoadTask.cancel(true);
                 downLoadTask.execute(ADDR+et.getText().toString());
             }
         });
@@ -104,8 +104,9 @@ public class MainActivity extends AppCompatActivity{
                 }
                 OutputStream outputStream = new FileOutputStream(file);
                 byte[] buffer = new byte[1024*4];
-                while (inputStream.read(buffer) != -1){
-                    outputStream.write(buffer);
+                int byteread = 0;
+                while ((byteread = inputStream.read(buffer)) != -1){
+                    outputStream.write(buffer,0,byteread);
                 }
                 outputStream.flush();
                 outputStream.close();
